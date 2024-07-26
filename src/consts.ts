@@ -23,10 +23,10 @@ export const ART: Metadata = {
   DESCRIPTION: "Some of my art creations.",
 };
 
-// export const PROJECTS: Metadata = {
-//   TITLE: "Projects",
-//   DESCRIPTION: "Peronal & work projects.",
-// };
+export const PROJECTS: Metadata = {
+  TITLE: "Projects",
+  DESCRIPTION: "Peronal & work projects.",
+};
 
 export const SOCIALS: Socials = [
   {

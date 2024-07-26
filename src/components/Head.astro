@@ -8,7 +8,7 @@ import { ViewTransitions } from "astro:transitions";
 
 interface Props {
   title: string;
-  description: string;
+  description: string | undefined;
   image?: string;
 }
 
@@ -35,7 +35,9 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
-<meta name="description" content={description} />
+
+{description && <meta name="description" content={description} />}
+
 
 <!-- Open Graph / Facebook -->
 <!-- <meta property="og:type" content="website" />
