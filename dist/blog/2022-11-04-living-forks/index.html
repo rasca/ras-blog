@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)"><link rel="icon" type="image/x-icon" href="/favicon-light.svg"><meta name="generator" content="Astro v4.12.2"><!-- Font preloads --><link rel="preload" href="/_astro/urbanist-latin-wght-normal.S2b5Uui_.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/ibarra-real-nova-latin-wght-normal.CzKo1l45.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://astro-nano-demo.vercel.app/blog/2022-11-04-living-forks/"><!-- Primary Meta Tags --><title>Living Forks | Ras</title><meta name="title" content="Living Forks | Ras"><meta name="description" content="Towards trully decentralized open source."><!-- Open Graph / Facebook --><!-- <meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.url)} /> --><!-- Twitter --><!-- <meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.url)} /> --><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const lightThemeButton = document.getElementById("light-theme-button");
+    lightThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "light");
+      toggleTheme(false);
+    });
+
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    darkThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "dark");
+      toggleTheme(true);
+    });
+
+    const systemThemeButton = document.getElementById("system-theme-button");
+    systemThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "system");
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    });
+
+    window.matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", event => {
+        if (localStorage.theme === "system") {
+          toggleTheme(event.matches);
+        }
+      }
+    );
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 150);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+  window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_slug_.DzWWetO0.css"><script type="module" src="/_astro/hoisted.BMnUj_RX.js"></script></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 justify-between"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> Ras </div>  </a> <nav class="flex gap-1"> <a href="/blog" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+blog
+ </a> <span> / </span> <a href="/art" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+art
+ </a> <!-- <span>
+          {`/`}
+        </span>
+        <Link href="/projects">
+          projects
+        </Link> --> </nav> </div>  </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="animate"> <a href="/blog" class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm"> 
+Back to blog
+ </div> </a> </div> <div class="space-y-1 my-10"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> <time datetime="2022-11-04T03:00:00.000Z"> Nov 4, 2022 </time> </div>
+&bull;
+<div class="font-base text-sm"> 9 min read </div> </div> <div class="animate text-2xl font-semibold text-black dark:text-white"> Living Forks </div> </div> <article class="animate"> <p>Have you ever forked a repo for a small change you wanted, got it to run but
+after a while the maintenance burden became too much to handle? What if I told
+you this can be done much easier with less friction? I’ve been toying with this
+idea for a while now.</p>
+<p>Currently all the burden falls to the fork maintainer. We have many tools at
+our disposal that with a bit of mix and matching, and some glue code in the
+middle can improve this tremendously.</p>
+<p>In my ideal world many forks of the same code can live in the wild with minimum
+effort. Users have the freedom to  try and use different forks that get updated
+semi automatically. I call this <em><strong>living forks</strong></em>.</p>
+<h2 id="a-little-bit-of-background">A little bit of background</h2>
+<p>I believe in free software. Free as in I can not only use it but modify it to
+my needs. Inspect the code, understand it, modify it, test it and then use it.
+Current open source software fails to achieve this ideal. It’s just too hard to
+maintain forks of several projects at the same time. It becomes a full time job
+rather quickly as you fork more and more repos. And your forks are doomed to
+become outdated.</p>
+<p>I mostly fork repos of libraries dependencies for projects I work on. When the
+change is not specific to my repo I try to create a PR upstream so I don’t need
+to rely on my fork anymore. But most of the times I just leave them there
+languishing until I need to update the framework version of the project and the
+fork stops working and breaks the project. At that point I start a tedious
+process of bringing the repo back in sync with the upstream code. Sometimes
+that’s rather easy but I have to almost always go over all the commits in the
+main repo to make sure nothing broke.</p>
+<p>I must admit that I’m lazy and most of the times I don’t write a test for the
+change I incorporated. It would be much nicer if I get notified that a change
+upstream conflicts with my fork or makes a test don’t run anymore. If this were
+true I would be much more inclined to write that test.</p>
+<p>The other case in which I fork repos is for software I personally use but I
+want to make a small change in UX or functionality to most easily fulfil my
+needs. In this case I need to build from source, and if I don’t keep up with
+the changes my installation of the software becomes stuck in an old version
+subject to security vulnerabilities.</p>
+<p>I would like to still have automatic updates with my change applied. Of course
+this updates would be optimistic but I can always go back to the previous
+version if something breaks till I fix it.</p>
+<p>There’s nothing stopping us/me from having all this. In this article I’ll lay
+out a plan on how we can achieve this (and much more).</p>
+<h2 id="github-network-graph">Github network graph</h2>
+<p>Github helped a lot in the path towards free software, making it much more
+accessible to fork a repo and provide a unifyed way to contribute changes
+upstream via pull requests. The first time I saw the network graph that showed
+you the “living forks” of a repo I was mesmerised and this idea started to take
+form. But it falls short of my vision. Not only that, nowadays it’s even more
+difficult to access the graph than before. You need more clicks and to know
+where to find it. It’s lost relevance. It should be foremost to bring freedom
+to the user in a way they can decide with fork to use.</p>
+<p>I personally use it a lot. Before forking a repo I first investigate the forks
+network to see if someone else has already made the change. But github does not
+make it easy. I want to quickly see if a repo is being updated, or how many
+commits it’s fallen behind. I want to see at a glance the list of commits they
+made to understand the change. I want to see if the fork contributed a Pull
+Request and it’s purpose has been fulfilled. Right now I need to hover over
+small dots to read the commit messages and in some repos I need to endlessly
+scroll horizontally to find the changes, sometimes split into several small
+chunks of activity over a long time.  Currently I end up with dozens of open
+tabs one per fork.</p>
+<p>Once upon a time Wikipedia had a page explaining how to use it, that told you
+that you should always read the Talks discussion page for context on the
+article. At the time of writing I couldn’t find it. Github should have
+something similar explaining the steps you should make before forking a repo
+like it sometimes does explain for creating a new issue. I only found <a href="https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/understanding-connections-between-repositories">this
+page</a>
+that only explains how to navigate towards it.</p>
+<h2 id="forks-as-a-tree">Forks as a tree</h2>
+<p>In order to have multiple living forks of a project as a normal reality we
+need to start thinking about repos as a tree of related forks instead of
+thinking about them as a single unit. Each fork should be set to track another
+fork (or upstream) that tries to automatically follow them whenever possible.
+Once this change of mentality is done and we apply it to the current concepts
+everything decants easily.</p>
+<p>Let’s consider a commit. Once we push a new commit to a branch we have a CI job
+run that tells us if all tests pass. In the new way of thinking about this, it
+should automatically try to apply the commit to all forks and run tests
+everywhere indicating to the commit author in how many forks there where merge
+conflicts, in how many forks tests failed due to the commit and in how many
+forks did the changeset applied nicely without failing any tests.</p>
+<p>And once this commit is pushed into a main branch the forks maintainers should
+be notified as well. Of course this “nicely applied without failing any test”
+is an optimistic score but it’s much more useful than what we have today.</p>
+<p>This way the upstream repo owner knows how their changes affect the network and
+the fork owners know they have to fix a conflict.</p>
+<p>The same thing applies to releases. When an upstream repo creates a release why
+don’t all the forks get notified about it with the option to automatically and
+optimistically build a release to test the software? There’s nothing preventing
+us from doing this.</p>
+<p>All releases can be tied to a central error aggregator such a Sentry that can
+track different releases across forks so we can add <em>in the wild</em> error
+tracking on top of merge conflicts and failing tests.</p>
+<p>We might also want automatic deployments of every fork (if it applies) so we
+can easily test that the automatic tracking is working properly.</p>
+<h2 id="implementation">Implementation</h2>
+<p>Software like github/gitlab are the ideal hosts for this idea because they
+already have all the pieces needed in order to build this.</p>
+<p>For each fork tracking another one we need to create an optimistic branch that
+automatically applies new commits in order to run tests, build releases and
+automatically deploy the code. Once a manual review/test has been done, we can
+merge the optimistic branch into the main one.</p>
+<p>When a commit breaks more than one fork in the same way we can call them a
+cohort. If a fork of the cohort fixes the error, the system should try to apply
+the fix to all the other forks in the cohort.</p>
+<p>Many repos have good tests coverage with CI/CD and automatic builds so we would
+only need to add the error tracking layer to have all the pieces in place.</p>
+<p>We would then need to work on the UX of choosing a fork and figure out the
+software distribution for easy install and change across forks.</p>
+<h2 id="an-improved-network-graph">An improved network graph</h2>
+<p>With all these evolved concepts we can start thinking about an improved network
+graph. Instead of commits it would show forks with the tracking relationships
+in a tree shape. We can paint the colors of each fork based on if they have
+applied the latest changes cleanly or if they have breaking changes and are
+outdated and in this case the severity of the outdate.</p>
+<p>A green check should appear in the latest release that has been manually
+checked by the fork maintainer.</p>
+<p>It should also pinpoint which commits are the culprits so they can be fixed by
+the community.</p>
+<p>I think that having this tool completely automated is a necessity before the
+living forks can become a reality and users can have a free decision on which
+fork to use.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>A change like this will most likely bring many more contributors to open source
+and free software, forks will be more easily maintained and a new ecosystem of
+living forks will emerge.</p>
+<p>We already have all the tools in place, we just need them to work in tandem
+across forks.</p>
+<p>As a second order effect, I believe that test coverage will improve across the
+board and software will start to be written taking into consideration how it
+affects the community much more than it is today. In particular software
+maintainers will be made aware of breaking changes and in a more abstract way
+software will be written in a way that it’s easier to change getting us a step
+closer to malleable systems.</p> </article>  </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-5">  <div class="relative"> <div class="absolute right-0 -top-20"> <button id="back-to-top" class="relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm">
+Back to top
+</div> </button> </div> </div> <div class="flex justify-between items-center"> <div>
+&copy; 2024 | Ras </div> <div class="flex flex-wrap gap-1 items-center"> <button id="light-theme-button" aria-label="Light theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div>  </div> </footer> </body></html>
