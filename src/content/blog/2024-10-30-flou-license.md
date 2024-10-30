@@ -53,18 +53,23 @@ founders of failed open-source startups and licensing lawyers.
 
 ## Free software
 
-Our first instinct was to use a copyleft license for SaSS: AGPL. For our
-purposes this means that anyone modifying Flou must publicly share their
-changes. This strongly supports the project's freedom but we know that AGPL's
-restrictions can be unappealing to many corporations and projects.
+Our first instinct was to use a copyleft license for SaSS:
+[AGPL](https://www.gnu.org/licenses/agpl-3.0.en.html). For our purposes this
+means that anyone modifying Flou must publicly share their changes. This
+strongly supports the project's freedom but we know that AGPL's restrictions can
+be unappealing to many corporations and projects.
 
-Other licenses we considered, like SSPL, BSL (neither OSI approved) and FCL
-share similar limitations and are lesser known.
+Other licenses we considered, like
+[SSPL](https://www.mongodb.com/legal/licensing/server-side-public-license),
+[BSL](https://en.wikipedia.org/wiki/Business_Source_License)
+and [FCL](https://fcl.dev/) (neither OSI approved) share similar limitations and
+are lesser known.
 
-Dual licensing with a commercial license is an option (and one even RMS
-advocates), but it would require each contributor to sign a Contributor License
-Agreement (CLA) which could alienate potential contributors and complicate the
-contributing process.
+Dual licensing with a commercial license is an option (and one even [RMS
+advocates](https://www.gnu.org/philosophy/selling-exceptions.en.html)), but it
+would require each contributor to sign a Contributor License Agreement (CLA)
+which could alienate potential contributors and complicate the contributing
+process.
 
 We ultimately ruled out AGPL and other restrictive licenses or open core
 privative licenses.
@@ -75,11 +80,12 @@ is just beyond our scope.
 
 ## A realistic approach
 
-MIT is the current standard for open source frameworks being a permissive
-license that's widely recognized and used. Its main drawbacks for us is that it
-enables unfair competition from big tech and derivate work might not be
-open-sourced. Its main appeal is that it won't prevent anyone from using and
-contributing to Flou if they choose.
+The [MIT license](https://choosealicense.com/licenses/mit/) is the current
+standard for open source frameworks being a permissive license that's widely
+recognized and used. Its main drawbacks for us is that it enables unfair
+competition from big tech and derivate work might not be open-sourced. Its main
+appeal is that it won't prevent anyone from using and contributing to Flou if
+they choose.
 
 We want to be transparent about our monetization strategy to help Flou meet its
 goals. Our business roadmap focuses on three main pillars:
@@ -93,10 +99,10 @@ considering dual licensing with AGPL + CLA or Fair Licensing for these three
 features.
 
 Changing licenses down the line is difficult, as it requires consent from
-contributors, so we've carefully weighed this decision. We'ew confident this
+contributors, so we've carefully weighed this decision. We're confident this
 approach serves the future prosperity of Flou and its incipient community.
 
-For those interested in exploring different licesing options, here are some
+For those interested in exploring different licensing options, here are some
 helpful resources:
 
 * [Open Source Initiative (OSI)](https://opensource.org/): What constitutes
@@ -108,8 +114,7 @@ helpful resources:
 * [CLA chooser](https://contributoragreements.org/ca-cla-chooser/): a tool for
   creating your CLA
 
-
 ## Contact me
 
-If you have any question about Flou's licensing model or want to share feedback 
+If you have any question about Flou's licensing model or want to share feedback
 please reach out to me at raskovsky@gmail.com.
