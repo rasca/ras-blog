@@ -32,9 +32,9 @@ the processes of choosing a license several things steered me into different
 directions: my personal beliefs and philosophy and the reality of the market
 and ecosystem.
 
-On one hand I firmly believe that Flou's success relies on it becoming a
+On one hand I firmly believe that Flou's success relies on it becoming an
 ubiquitous project, a foundation layer upon which everyone can build LLM-powered
-apps.  To achieve this, Flou needs to be as open as possible. On the other hand,
+apps. To achieve this, Flou needs to be as open as possible. On the other hand,
 I honestly accept that for Flou to iterate, grow and cement itself in today's
 fast-paced environment we'll need a strong business model, funding and
 protection against potential exploitation by the big corps.
@@ -85,7 +85,7 @@ standard for open source frameworks being a permissive license that's widely
 recognized and used. Its main drawbacks for us is that it enables unfair
 competition from big tech and derivate work might not be open-sourced. Its main
 appeal is that it won't prevent anyone from using and contributing to Flou if
-they choose.
+they choose to.
 
 We want to be transparent about our monetization strategy to help Flou meet its
 goals. Our business roadmap focuses on three main pillars:
@@ -118,3 +118,4 @@ helpful resources:
 
 If you have any question about Flou's licensing model or want to share feedback
 please reach out to me at raskovsky@gmail.com.
+
