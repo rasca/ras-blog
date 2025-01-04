@@ -9,8 +9,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Urbanist Variable", ...defaultTheme.fontFamily.sans],
-        serif: ["Ibarra Real Nova Variable", ...defaultTheme.fontFamily.serif],
+        // sans: ["Urbanist Variable", ...defaultTheme.fontFamily.sans],
+        // serif: ["Ibarra Real Nova Variable", ...defaultTheme.fontFamily.serif],
+        sans: ["Work Sans", ...defaultTheme.fontFamily.sans],
+        serif: ["Libre Baskerville", ...defaultTheme.fontFamily.serif],
       },
     },
   },

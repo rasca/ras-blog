@@ -1,9 +1,13 @@
 ---
 import "../styles/global.css";
-import '@fontsource-variable/urbanist/index.css';
-import '@fontsource-variable/ibarra-real-nova/index.css';
-import urbanist from "@fontsource-variable/urbanist/files/urbanist-latin-wght-normal.woff2";
-import ibarraRealNova from "@fontsource-variable/ibarra-real-nova/files/ibarra-real-nova-latin-wght-normal.woff2";
+import "@fontsource/libre-baskerville/index.css";
+import "@fontsource/work-sans/index.css";
+import libreBaskerville from "@fontsource/libre-baskerville/files/libre-baskerville-latin-400-normal.woff2";
+import workSans from "@fontsource/work-sans/files/work-sans-latin-100-normal.woff2";
+// import '@fontsource-variable/urbanist/index.css';
+// import '@fontsource-variable/ibarra-real-nova/index.css';
+// import urbanist from "@fontsource-variable/urbanist/files/urbanist-latin-wght-normal.woff2";
+// import ibarraRealNova from "@fontsource-variable/ibarra-real-nova/files/ibarra-real-nova-latin-wght-normal.woff2";
 import { ViewTransitions } from "astro:transitions";
 
 interface Props {
@@ -26,8 +30,10 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link rel="preload" href={urbanist} as="font" type="font/woff2" crossorigin/>
-<link rel="preload" href={ibarraRealNova} as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href={libreBaskerville} as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href={workSans} as="font" type="font/woff2" crossorigin/>
+<!-- <link rel="preload" href={urbanist} as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href={ibarraRealNova} as="font" type="font/woff2" crossorigin/> -->
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />

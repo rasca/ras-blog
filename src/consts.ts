@@ -13,8 +13,8 @@ export const HOME: Metadata = {
   DESCRIPTION: "Iván Raskovsky's public space.",
 };
 
-export const BLOG: Metadata = {
-  TITLE: "Blog",
+export const WRITINGS: Metadata = {
+  TITLE: "Writings",
   DESCRIPTION: "A collection of ideas and rumblings I want to share publicly.",
 };
 
