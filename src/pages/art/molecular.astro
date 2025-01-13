@@ -1,0 +1,56 @@
+---
+import MolecularLayout from '../../layouts/MolecularLayout.astro';
+import { getEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+type ArtEntry = CollectionEntry<'art'>;
+
+const molecular = await getEntry('art', 'molecular') as ArtEntry;
+const { title, subtitle, media } = molecular.data;
+
+if (!title || !subtitle) {
+  throw new Error('Title and subtitle are required');
+}
+
+const { Content } = await molecular.render();
+
+// Initialize sections
+const sections = {
+  exhibition: '',
+  backstage: '',
+  team: '',
+  materials: ''
+};
+---
+
+<div id="content-container" style="display: none;">
+  <Content />
+</div>
+
+<MolecularLayout 
+  title={title} 
+  subtitle={subtitle} 
+  sections={sections}
+  media={media}
+/>
+
+<script>
+  // Initialize content from markdown
+  window.addEventListener('load', () => {
+    const container = document.getElementById('content-container');
+    if (!container) return;
+
+    const sectionElements = container.querySelectorAll('[data-section]');
+    sectionElements.forEach(section => {
+      const name = section.getAttribute('data-section');
+      if (!name) return;
+      
+      const contentElement = document.getElementById(`${name}-content`);
+      if (contentElement) {
+        contentElement.innerHTML = section.innerHTML;
+      }
+    });
+
+    container.remove();
+  });
+</script> 

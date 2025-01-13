@@ -1,0 +1,62 @@
+---
+interface MediaItem {
+  readonly type: 'image' | 'video';
+  readonly src: string;
+  readonly alt?: string;
+}
+
+interface Props {
+  media: readonly MediaItem[];
+}
+
+const { media } = Astro.props;
+---
+
+<div class="media-container">
+  {media.map(item => (
+    item.type === 'video' ? (
+      <video 
+        src={item.src} 
+        controls 
+        muted 
+        loop
+        class="media-item"
+      />
+    ) : (
+      <img 
+        src={item.src} 
+        alt={item.alt || ''}
+        class="media-item"
+      />
+    )
+  ))}
+</div>
+
+<style>
+  .media-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    height: 100%;
+    will-change: transform;
+  }
+
+  .media-item {
+    height: 100vh;
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .media-item:hover {
+    transform: scale(1.02);
+  }
+
+  @media (max-width: 768px) {
+    .media-item {
+      height: 40vh;
+    }
+  }
+</style> 

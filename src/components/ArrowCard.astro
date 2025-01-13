@@ -13,6 +13,11 @@ const { entry } = Astro.props;
     <div class="font-semibold">
       {entry.data.title}
     </div>
+    {entry.data.subtitle && (
+      <div class="text-sm text-gray-600 dark:text-gray-400">
+        {entry.data.subtitle}
+      </div>
+    )}
     <div class="text-sm">
       <!-- {entry.data.description} -->
     </div>
