@@ -51,6 +51,7 @@ const sectionIds = Object.keys(sections);
         sectionIds.map((sectionId) => (
           <div class="section" id={sectionId}>
             <div class="text-content">
+              <h3>{sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}</h3>
               <div id={`${sectionId}-content`} />
             </div>
             <div class="media-scroll">
@@ -73,12 +74,143 @@ const sectionIds = Object.keys(sections);
       }
     </footer>
 
+    <script>
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+      import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+      // Header show/hide on scroll
+      let lastScrollTop = 0;
+      const header = document.querySelector('.molecular-header');
+      
+      ScrollTrigger.create({
+        start: 0,
+        end: "max",
+        onUpdate: (self) => {
+          const st = window.pageYOffset || document.documentElement.scrollTop;
+          if (st > lastScrollTop) {
+            // Scrolling down
+            gsap.to(header, {
+              yPercent: -100,
+              duration: 0.3,
+              ease: "power2.inOut"
+            });
+          } else {
+            // Scrolling up
+            gsap.to(header, {
+              yPercent: 0,
+              duration: 0.3,
+              ease: "power2.inOut"
+            });
+          }
+          lastScrollTop = st;
+        }
+      });
+
+      // Initialize smooth scrolling and snapping
+      const sections = document.querySelectorAll(".section");
+      const heroSection = document.querySelector(".hero-section");
+
+      // Create an array of all sections including hero
+      const allSections = [heroSection, ...sections];
+
+      // Set up scroll snapping
+      allSections.forEach((section, i) => {
+        if (!section) return;
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top top",
+          // snap: {
+          //   snapTo: 1,
+          //   duration: { min: 0.2, max: 0.5 },
+          //   delay: 0.01,
+          //   ease: "power1.inOut",
+          // },
+          scrub: 1,
+        });
+      });
+
+      // Set up horizontal scroll for each media section
+      sections.forEach((section) => {
+
+        const mediaContainer = section.querySelector('.media-container');
+        if (!mediaContainer || !(mediaContainer instanceof HTMLElement)) return;
+
+        // Calculate the scroll width
+        const scrollWidth = mediaContainer.scrollWidth;
+        const containerWidth = mediaContainer.offsetWidth;
+        const maxScroll = scrollWidth - containerWidth;
+
+        // Create timeline for horizontal scroll
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+            markers: true,
+            end: () => `+=${maxScroll}`,
+          }
+        });
+
+
+        // Animate the horizontal scroll
+        tl.to(mediaContainer, {
+          x: -maxScroll,
+          ease: "none"
+        });
+      });
+
+      // Footer section highlighting
+      const footerSections = document.querySelectorAll(".footer-section");
+
+      ScrollTrigger.create({
+        trigger: ".content",
+        start: "top top",
+        end: "bottom bottom",
+        onUpdate: (self) => {
+          sections.forEach((section, i) => {
+            const bounds = section.getBoundingClientRect();
+            if (
+              bounds.top < window.innerHeight * 0.5 &&
+              bounds.bottom > window.innerHeight * 0.5
+            ) {
+              footerSections.forEach((fs) => fs.classList.remove("active"));
+              footerSections[i].classList.add("active");
+            }
+          });
+        },
+      });
+
+      // Smooth scroll for footer links
+      document.querySelectorAll(".footer-section a").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const href = link.getAttribute("href");
+          if (!href) return;
+
+          const targetId = href.slice(1);
+          const target = document.getElementById(targetId);
+          if (target) {
+            gsap.to(window, {
+              duration: 1,
+              scrollTo: target,
+              ease: "power2.inOut",
+            });
+          }
+        });
+      });
+    </script>
+
     <style>
       :root {
         --header-height: 60px;
         --footer-height: 80px;
         --text-width: 400px;
-        --transparent-background: rgba(255, 255, 255, 0.8);
+        --transparent-background: rgba(255, 255, 255, 0.6);
       }
 
       * {
@@ -103,6 +235,8 @@ const sectionIds = Object.keys(sections);
         z-index: 1000;
         background: var(--transparent-background);
         backdrop-filter: blur(10px);
+        transform: translateY(0);
+        transition: transform 0.3s ease;
       }
 
       .hero-section {
@@ -150,23 +284,34 @@ const sectionIds = Object.keys(sections);
       .section {
         min-height: 100vh;
         position: relative;
-        scroll-margin-top: var(--header-height);
         display: flex;
         max-width: 100vw;
       }
 
       .text-content {
         width: var(--text-width);
-        position: sticky;
         padding: 2rem;
+        padding-top: calc(var(--header-height) + 2rem);
         background: white;
         z-index: 1;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 20px rgba(0, 0, 0, 0.1);
+      }
+      h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-transform: capitalize;
       }
 
       .media-scroll {
         flex: 1;
-        overflow-x: scroll;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+      }
+
+      .media-scroll::-webkit-scrollbar {
+        display: none;
       }
 
       .molecular-footer {
