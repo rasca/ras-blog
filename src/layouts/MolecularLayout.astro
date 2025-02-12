@@ -138,28 +138,22 @@ const sectionIds = Object.keys(sections);
         const mediaContainer = section.querySelector('.media-container');
         if (!mediaContainer || !(mediaContainer instanceof HTMLElement)) return;
 
-        // Calculate the scroll width
-        const scrollWidth = mediaContainer.scrollWidth;
-        const containerWidth = mediaContainer.offsetWidth;
-        const maxScroll = scrollWidth - containerWidth;
-
         // Create timeline for horizontal scroll
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
             start: "top top",
-            scrub: 1,
+            scrub: true,
             pin: true,
-            anticipatePin: 1,
+            // anticipatePin: 1,
             markers: true,
-            end: () => `+=${maxScroll}`,
+            end: () => `+=${(mediaContainer.scrollWidth - mediaContainer.clientWidth)}`,
           }
         });
 
-
         // Animate the horizontal scroll
         tl.to(mediaContainer, {
-          x: -maxScroll,
+          x: -(mediaContainer.scrollWidth - mediaContainer.clientWidth),
           ease: "none"
         });
       });
@@ -294,7 +288,7 @@ const sectionIds = Object.keys(sections);
         padding-top: calc(var(--header-height) + 2rem);
         background: white;
         z-index: 1;
-        box-shadow: 0 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 20px 0 20px rgba(0, 0, 0, 0.1);
       }
       h3 {
         font-size: 1.5rem;
@@ -308,6 +302,8 @@ const sectionIds = Object.keys(sections);
         display: flex;
         align-items: center;
         white-space: nowrap;
+        height: 100vh;
+        padding-bottom: var(--footer-height);
       }
 
       .media-scroll::-webkit-scrollbar {
@@ -322,7 +318,7 @@ const sectionIds = Object.keys(sections);
         height: var(--footer-height);
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1rem;
+        gap: 3rem;
         background: var(--transparent-background);
         backdrop-filter: blur(10px);
         z-index: 100;

@@ -21,10 +21,20 @@ const sections = {
   team: '',
   materials: ''
 };
+
+// Flatten media array for preloading
+const allMedia = Object.values(media).flat();
 ---
 
 <div id="content-container" style="display: none;">
   <Content />
+</div>
+
+<div id="loading-progress" class="loading-progress">
+  <div class="progress-bar">
+    <div class="progress-fill"></div>
+  </div>
+  <div class="progress-text">Loading media: 0%</div>
 </div>
 
 <MolecularLayout 
@@ -34,12 +44,44 @@ const sections = {
   media={media}
 />
 
-<script>
-  // Initialize content from markdown
-  window.addEventListener('load', () => {
-    const container = document.getElementById('content-container');
-    if (!container) return;
+<script define:vars={{ allMedia }}>
+  // Preload a single media item
+  async function preloadMediaItem(item) {
+    return new Promise((resolve, reject) => {
+      if (item.type === 'image') {
+        const img = new Image();
+        img.onload = () => resolve();
+        img.onerror = () => reject();
+        img.src = item.src;
+      } else if (item.type === 'video') {
+        const video = document.createElement('video');
+        video.preload = 'auto';
+        
+        // We'll consider the video "loaded" when we have enough data to play
+        video.oncanplaythrough = () => resolve();
+        video.onerror = () => reject();
+        
+        // Some browsers need these
+        video.muted = true;
+        video.playsInline = true;
+        
+        video.src = item.src;
+        // Trigger loading
+        video.load();
+      }
+    });
+  }
 
+  // Initialize content from markdown and handle preloading
+  window.addEventListener('load', async () => {
+    const container = document.getElementById('content-container');
+    const progressBar = document.querySelector('.progress-fill');
+    const progressText = document.querySelector('.progress-text');
+    const loadingProgress = document.getElementById('loading-progress');
+    
+    if (!container || !progressBar || !progressText || !loadingProgress) return;
+
+    // Process markdown sections
     const sectionElements = container.querySelectorAll('[data-section]');
     sectionElements.forEach(section => {
       const name = section.getAttribute('data-section');
@@ -52,5 +94,65 @@ const sections = {
     });
 
     container.remove();
+
+    // Preload all media sequentially
+    let loaded = 0;
+    const totalItems = allMedia.length;
+    
+    for (const item of allMedia) {
+      try {
+        await preloadMediaItem(item);
+        loaded++;
+        const percentage = Math.round((loaded / totalItems) * 100);
+        progressBar.style.width = `${percentage}%`;
+        progressText.textContent = `Loading media: ${percentage}%`;
+      } catch (error) {
+        console.error('Failed to load media:', item.src);
+      }
+    }
+
+    // Hide progress bar with a fade out
+    loadingProgress.style.opacity = '0';
+    setTimeout(() => {
+      loadingProgress.style.display = 'none';
+    }, 500);
   });
-</script> 
+</script>
+
+<style>
+  .loading-progress {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+    font-size: 0.875rem;
+  }
+
+  .progress-bar {
+    width: 200px;
+    height: 4px;
+    background: #f3f3f3;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #3498db;
+    transition: width 0.3s ease;
+  }
+
+  .progress-text {
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #333;
+  }
+</style> 

@@ -33,23 +33,29 @@ const { media } = Astro.props;
 </div>
 
 <style>
+  :root {
+    --media-gallery-padding: 1rem;
+  }
   .media-container {
     display: flex;
-    gap: 2rem;
+    /* padding: var(--media-gallery-padding); */
+    gap: var(--media-gallery-padding);
     height: 100%;
     will-change: transform;
   }
 
   .media-item {
-    height: 100vh;
+    height: 100%;
     width: auto;
     object-fit: contain;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    margin-left: calc(50%);
+    transform: translateX(-50%);
   }
 
-  .media-item:hover {
-    transform: scale(1.02);
+  .media-item:last-child {
+    /* margin-right: 50%; */
   }
 
   @media (max-width: 768px) {

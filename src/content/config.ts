@@ -19,7 +19,7 @@ const writings = defineCollection({
 const art = defineCollection({
   schema: z.object({
     title: z.string(),
-    subtitle: z.string(),
+    subtitle: z.string().optional(),
     date: z.string(),
     tags: z.array(z.string()),
     media: z.record(z.string(), z.array(mediaItem)).default({}),
