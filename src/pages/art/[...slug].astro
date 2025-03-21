@@ -9,8 +9,7 @@ import Link from "@components/Link.astro";
 
 export async function getStaticPaths() {
   const projects = (await getCollection("art"))
-    .filter(post => !post.data.draft)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
   return projects.map((project) => ({
     params: { slug: project.slug },
     props: project,
@@ -22,7 +21,7 @@ const project = Astro.props;
 const { Content } = await project.render();
 ---
 
-<PageLayout title={project.data.title} description={project.data.description}>
+<PageLayout title={project.data.title}>
   <Container>
     <div class="animate">
       <BackToPrev href="/art">
@@ -32,7 +31,7 @@ const { Content } = await project.render();
     <div class="space-y-1 my-10">
       <div class="animate flex items-center gap-1.5">
         <div class="font-base text-sm">
-          <FormattedDate date={project.data.date} />
+          <FormattedDate date={new Date(project.data.date)} />
         </div>
         &bull;
         <div class="font-base text-sm">

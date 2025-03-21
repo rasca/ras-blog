@@ -1,4 +1,4 @@
-import rss from "@astrojs/rss";
+import rss, { type RSSFeedItem } from "@astrojs/rss";
 import { getCollection } from "astro:content";
 import { HOME } from "@consts";
 
@@ -12,7 +12,7 @@ export async function GET(context: Context) {
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
   const projects = (await getCollection("projects"))
-    .filter(project => !project.data.draft);
+    .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 
   const items = [...writings, ...projects]
     .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
@@ -23,9 +23,9 @@ export async function GET(context: Context) {
     site: context.site,
     items: items.map((item) => ({
       title: item.data.title,
-      description: item.data.description,
+      description: "description" in item.data ? item.data.description : undefined,
       pubDate: item.data.date,
       link: `/${item.collection}/${item.slug}/`,
-    })),
+    })) as RSSFeedItem[],
   });
 }

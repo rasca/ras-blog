@@ -44,7 +44,7 @@ const allMedia = Object.values(media).flat();
   media={media}
 />
 
-<script define:vars={{ allMedia }}>
+<script is:inline define:vars={{ allMedia }}>
   // Preload a single media item
   async function preloadMediaItem(item) {
     return new Promise((resolve, reject) => {
